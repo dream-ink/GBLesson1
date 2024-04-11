@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Human {
-    public String name;
-    public LocalDate dob, dad;
-    public Gender gender;
-    public List<Human>children;
-    public int age;
-    public String mother;
-    public String father;
+    private String name;
+    private LocalDate dob, dad;
+    private Gender gender;
+    private List<Human>children;
+    private int age;
+    private Human mother;
+    private Human father;
 
-    public Human(String name, LocalDate dob, LocalDate dad, Gender gender, int age, String mother, String father) {
+    public Human(String name, LocalDate dob, LocalDate dad, Gender gender, int age, Human mother, Human father) {
         this.name = name;
         this.dob = dob;
         this.dad = dad;
@@ -23,6 +23,7 @@ public class Human {
         this.father = father;
         children = new ArrayList<>();
     }
+
     public boolean addChild(Human child) {
         if (!children.contains(child)) {
             children.add(child);
@@ -97,10 +98,10 @@ public class Human {
     public List<String> getParents() {
         List<String> list = new ArrayList<>(2);
         if (father != null) {
-            list.add(father);
+            list.add(String.valueOf(father));
         }
         if (mother != null) {
-            list.add(mother);
+            list.add(String.valueOf(mother));
         }
         return list;
     }
