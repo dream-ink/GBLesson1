@@ -1,15 +1,16 @@
 package family_tree.human;
 
+import family_tree.family_tree.TreeN;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  Human implements Serializable {
+public class  Human implements Serializable, TreeN<String> {
     private String name;
     private LocalDate dob, dad;
     private Gender gender;
-    private List<Human>children;
+    private List<String> children;
     private int age;
     private Human mother;
     private Human father;
@@ -22,10 +23,10 @@ public class  Human implements Serializable {
         this.age = age;
         this.mother = mother;
         this.father = father;
-        children = new ArrayList<>();
+        children = new ArrayList<String>();
     }
 
-    public boolean addChild(Human child) {
+    public boolean addChild(String child) {
         if (!children.contains(child)) {
             children.add(child);
             return true;
@@ -80,11 +81,11 @@ public class  Human implements Serializable {
         this.dad = dad;
     }
 
-    public List<Human> getChildren() {
+    public List<String> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Human> children) {
+    public void setChildren(List<String> children) {
         this.children = children;
     }
 

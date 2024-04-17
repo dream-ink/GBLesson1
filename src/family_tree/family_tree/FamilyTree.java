@@ -3,18 +3,18 @@ package family_tree.family_tree;
 import family_tree.human.Human;
 import family_tree.human.HumanCompBD;
 import family_tree.human.HumanCompName;
+import family_tree.family_tree.TreeN;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
-public class FamilyTree implements Serializable, Iterable<Human> {
-    private List<Human> humanList;
+public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E> {
+    private List<E> humanList;
 
-    public FamilyTree(List<Human> humanList) {
+    public FamilyTree(List<E> humanList) {
         this.humanList = humanList;
     }
 
@@ -22,7 +22,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         this(new ArrayList<>());
     }
 
-    public boolean add(Human human) {
+    public boolean add(E human) {
         if (human == null) {
             return false;
         }
@@ -34,9 +34,9 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         return false;
     }
 
-    public List<Human> getByName(String name) {
-        List<Human> res = new ArrayList<>();
-        for (Human human : humanList) {
+    public List<E> getByName(String name) {
+        List<E> res = new ArrayList<>();
+        for (E human : humanList) {
             if (human.getName().equals(name)) {
                 res.add(human);
             }
@@ -54,7 +54,7 @@ public class FamilyTree implements Serializable, Iterable<Human> {
         sbuilder.append("Сейчас в древе ");
         sbuilder.append(humanList.size());
         sbuilder.append(" объектов: \n");
-        for (Human human : humanList) {
+        for (E human : humanList) {
             sbuilder.append(human);
             sbuilder.append("\n");
         }
@@ -62,15 +62,15 @@ public class FamilyTree implements Serializable, Iterable<Human> {
     }
 
     public void sortName() {
-        humanList.sort(new HumanCompName());
+        humanList.sort((Comparator<? super E>) new HumanCompName());
     }
 
     public void sortAge() {
-        humanList.sort(new HumanCompBD());
+        humanList.sort((Comparator<? super E>) new HumanCompBD());
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new FamilyTreeIter(humanList);
+    public Iterator<E> iterator() {
+        return (Iterator<E>) new FamilyTreeIter(humanList);
     }
 }
