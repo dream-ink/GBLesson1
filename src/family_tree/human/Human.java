@@ -1,12 +1,14 @@
 package family_tree.human;
 
 import family_tree.family_tree.TreeN;
+import family_tree.family_tree.FamilyTree;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  Human implements Serializable, TreeN<String> {
+
+public class  Human implements Serializable, TreeN<Human> {
     private String name;
     private LocalDate dob, dad;
     private Gender gender;
@@ -29,6 +31,7 @@ public class  Human implements Serializable, TreeN<String> {
     public boolean addChild(String child) {
         if (!children.contains(child)) {
             children.add(child);
+
             return true;
         }
         return false;
@@ -59,6 +62,11 @@ public class  Human implements Serializable, TreeN<String> {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean addChild(Human human) {
+        return false;
     }
 
     public void setName(String name) {

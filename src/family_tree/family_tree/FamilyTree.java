@@ -1,25 +1,23 @@
 package family_tree.family_tree;
 
-import family_tree.human.Human;
 import family_tree.human.HumanCompBD;
 import family_tree.human.HumanCompName;
-import family_tree.family_tree.TreeN;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E> {
     private List<E> humanList;
 
-    public FamilyTree(List<E> humanList) {
-        this.humanList = humanList;
-    }
-
     public FamilyTree() {
         this(new ArrayList<>());
+    }
+
+    public FamilyTree(List<E> humanList) {
+        this.humanList = humanList;
     }
 
     public boolean add(E human) {
@@ -29,9 +27,19 @@ public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E>
         if (!humanList.contains(human)) {
             humanList.add(human);
 
+            addToParents(human);
+            addToChildren(human);
             return true;
         }
         return false;
+    }
+
+    private void addToParents(E human) {
+        for (E parent : human.getParents()) ;
+    }
+
+    private void addToChildren(E human) {
+        for (E parent : human.getParents()) ;
     }
 
     public List<E> getByName(String name) {
@@ -62,11 +70,11 @@ public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E>
     }
 
     public void sortName() {
-        humanList.sort((Comparator<? super E>) new HumanCompName());
+        humanList.sort(new HumanCompName<>());
     }
 
     public void sortAge() {
-        humanList.sort((Comparator<? super E>) new HumanCompBD());
+        humanList.sort(new HumanCompBD<>());
     }
 
     @Override

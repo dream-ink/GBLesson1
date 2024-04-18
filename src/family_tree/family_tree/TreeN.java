@@ -9,6 +9,11 @@ import java.util.Locale;
 
 public interface TreeN<T> extends Serializable {
     String getName();
+    boolean addChild(T human);
+    boolean addParent(T human);
+    int getAge();
+    LocalDate getDob();
+    LocalDate getDad();
     List<T> getChildren();
     List<T> getParents();
 }
