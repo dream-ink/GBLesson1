@@ -89,7 +89,7 @@ public class  Human implements Serializable, TreeN<Human> {
         this.dad = dad;
     }
 
-    public List<String> getChildren() {
+    public List getChildren() {
         return children;
     }
 
@@ -105,7 +105,7 @@ public class  Human implements Serializable, TreeN<Human> {
         this.age = age;
     }
 
-    public List<String> getParents() {
+    public List getParents() {
         List<String> list = new ArrayList<>(2);
         if (father != null) {
             list.add(String.valueOf(father));
