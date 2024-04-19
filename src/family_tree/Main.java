@@ -1,15 +1,15 @@
 package family_tree;
 
-import family_tree.family_tree.FamilyTree;
-import family_tree.human.Gender;
-import family_tree.human.Human;
-import family_tree.writer.FileHandler;
+import family_tree.model.family_tree.FamilyTree;
+import family_tree.model.human.Gender;
+import family_tree.model.human.Human;
+import family_tree.model.writer.FileHandler;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        String filePath = "src/family_tree/writer/ftree.txt";
+        String filePath = "src/family_tree/model/writer/ftree.txt";
         //FamilyTree tree = read(filePath);
         FamilyTree tree = testTree();
         System.out.println(tree);
