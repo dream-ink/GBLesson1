@@ -1,6 +1,9 @@
 package family_tree.model.family_tree;
 
+import family_tree.model.human.Human;
+
 import java.io.Serializable;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.List;
 
 public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E> {
     private final List<E> humanList;
+    private Writer writer;
 
     public FamilyTree() {
         this(new ArrayList<>());
@@ -58,4 +62,5 @@ public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E>
     public Iterator<E> iterator() {
         return (Iterator<E>) new FamilyTreeIter(humanList);
     }
+
 }

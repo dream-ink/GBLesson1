@@ -4,11 +4,17 @@ import family_tree.model.family_tree.FamilyTree;
 import family_tree.model.human.Gender;
 import family_tree.model.human.Human;
 import family_tree.model.writer.FileHandler;
+import family_tree.view.ConsoleUI;
+import family_tree.view.View;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+
+        View view = new ConsoleUI();
+        view.start();
+
         String filePath = "src/family_tree/model/writer/ftree.txt";
         //FamilyTree tree = read(filePath);
         FamilyTree tree = testTree();
