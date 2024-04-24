@@ -1,77 +1,104 @@
 package family_tree.view;
 
+import family_tree.model.human.Gender;
 import family_tree.presenter.Presenter;
 
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
+
+    private static final String INPUT_ERROR = "Вы ввели неверное значение";
     private Scanner scanner;
     private Presenter presenter;
-    boolean work;
+    private boolean work;
+    private MainMenu menu;
 
     public ConsoleUI() {
         scanner = new Scanner(System.in);
         presenter = new Presenter(this);
         work = true;
+        menu = new MainMenu(this);
+    }
+
+    @Override
+    public void printAnswer(String text) {
+        System.out.println(text);
+    }
+
+    @Override
+    public void sortByAge() {
+        presenter.sortByAge();
     }
 
     @Override
     public void start() {
-        System.out.println("Приветствие");
-        while (work) {
+        hello();
+        while (work){
             printMenu();
-            choice();
+            execute();
         }
     }
 
-    private void choice() {
-        String choice = scanner.nextLine();
-        switch (choice) {
-            case "1":
-                addHuman();
-                break;
-            case "2":
-                break;
-            case "3":
-                break;
-            case "4":
-                break;
-            case "5":
-                finish();
-                break;
-            default:
-                error();
-        }
-    }
-
-    private void error() {
-        System.out.println("Введено некорректное значение");
-    }
-
-    private void addHuman() {
-        System.out.println("Укажите имя");
-        String name = scanner.nextLine();
-        System.out.println("Укажите пол");
-        String gender = scanner.nextLine();
-        System.out.println("Укажите дату рождения");
-        int age = Integer.parseInt(scanner.nextLine());
-    }
-
-    private static void printMenu() {
-        System.out.println("1. Добавить члена семьи");
-        System.out.println("2. Получить древо");
-        System.out.println("3. Отсортировать по имени");
-        System.out.println("4. Отсортировать по дате рождения");
-        System.out.println("5. Закончить работу");
-    }
-
-    private void finish() {
-        System.out.println("Отключение");
+    public void finish() {
+        System.out.println("Приятно было пообщаться");
         work = false;
     }
 
-    @Override
-    public void printAnswer(String answer) {
+    public void sortByName() {
+        presenter.sortByName();
+    }
 
+    public void getHumansListInfo() {
+        presenter.getHumansListInfo();
+    }
+
+    public void addHuman() {
+        System.out.println("Введите имя члена семьи");
+        String name = scanner.nextLine();
+        System.out.println("Укажите возраст члена семьи");
+        String ageString = scanner.nextLine();
+        //сделать проверку ввода возраста
+        int age = Integer.parseInt(ageString);
+        presenter.addHuman(name, age);
+    }
+
+    private void hello(){
+        System.out.println("Доброго времени суток!");
+    }
+
+    private void execute(){
+        String line = scanner.nextLine();
+        if (checkTextForInt(line)){
+            int numCommand = Integer.parseInt(line);
+            if (checkCommand(numCommand)){
+                menu.execute(numCommand);
+            }
+        }
+    }
+
+    private boolean checkTextForInt(String text){
+        if (text.matches("[0-9]+")){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    private boolean checkCommand(int numCommand){
+        if (numCommand < menu.getSize()){
+            return true;
+        } else {
+            inputError();
+            return false;
+        }
+    }
+
+    private void printMenu(){
+        System.out.println(menu.menu());
+    }
+
+    private void inputError(){
+        System.out.println(INPUT_ERROR);
     }
 }

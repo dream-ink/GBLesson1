@@ -1,4 +1,4 @@
-package family_tree.model.family_tree;
+package family_tree.model.human.comparators;
 
 import family_tree.model.family_tree.TreeN;
 

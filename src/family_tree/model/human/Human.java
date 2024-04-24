@@ -28,6 +28,12 @@ public class  Human implements Serializable, TreeN<Human> {
         children = new ArrayList<String>();
     }
 
+    public Human(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+
     public boolean addChild(String child) {
         if (!children.contains(child)) {
             children.add(child);

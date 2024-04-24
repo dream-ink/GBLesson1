@@ -1,6 +1,8 @@
 package family_tree.model.family_tree;
 
-import family_tree.model.human.Human;
+import family_tree.model.family_tree.iterators.FamilyTreeIter;
+import family_tree.model.human.comparators.CompBD;
+import family_tree.model.human.comparators.CompName;
 
 import java.io.Serializable;
 import java.io.Writer;
@@ -63,4 +65,11 @@ public class FamilyTree<E extends TreeN<E>> implements Serializable, Iterable<E>
         return (Iterator<E>) new FamilyTreeIter(humanList);
     }
 
+    public void sortByName(){
+        humanList.sort(new CompName<>());
+    }
+
+    public void sortByAge(){
+        humanList.sort(new CompBD<>());
+    }
 }
