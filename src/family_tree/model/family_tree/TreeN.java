@@ -1,17 +1,23 @@
 package family_tree.model.family_tree;
 
 
-import java.io.Serializable;
+import family_tree.model.human.Human;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public interface TreeN<T> extends Serializable {
+public interface TreeN<H> {
     String getName();
-    boolean addChild(T human);
-    boolean addParent(T human);
+
+    boolean addChild(Human human);
+
     int getAge();
+    boolean addChild(H human);
+    boolean addParent(H human);
     LocalDate getDob();
     LocalDate getDad();
-    List<T> getChildren();
-    List<T> getParents();
+    List<H> getChildren();
+    List<H> getParents();
 }
+
+

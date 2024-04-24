@@ -4,8 +4,10 @@ import family_tree.model.family_tree.TreeN;
 
 import java.util.Comparator;
 
-public class CompBD< T extends TreeN> implements Comparator<T> {
-
+public class CompBD<T extends TreeN> implements Comparator<T> {
     @Override
-    public int compare(T o1, T o2) {return o1.getDob().compareTo(o2.getDob()); }
+    public int compare(T o1, T o2) {
+        return Integer.compare(o1.getAge(), o2.getAge());
+    }
 }
+
